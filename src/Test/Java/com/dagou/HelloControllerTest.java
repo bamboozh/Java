@@ -20,7 +20,7 @@ import java.net.URL;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HelloTest {
+public class HelloControllerTest {
     @LocalServerPort
     private  int port;
     private URL base;
