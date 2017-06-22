@@ -79,11 +79,44 @@ public class CalService {
         return result;
     }
     public  Integer fineLostByString(String targetArray){
+        return findLostBySet(this.stringToArray(targetArray));
+    }
+    public int[] stringToArray(String targetArray){
         String[] getArray= targetArray.split(",");
         int[] getInt=new int[getArray.length];
         for(int i=0;i<getArray.length;i++){
             getInt[i]=Integer.valueOf(getArray[i]);
         }
-        return findLostBySet(getInt);
+        return getInt;
+    }
+    public Integer findLostBySort(String targetArray){
+        return findLostBySort(stringToArray(targetArray));
+    }
+    public Integer findLostByMap(String targetArray){
+        return findLostByMap(stringToArray(targetArray));
+    }
+    public Integer findLostBySet(String targetArray){
+        return findLostBySet(stringToArray(targetArray));
+    }
+    public Integer findLostByXOR(String targetArray){
+        return findLostByXOR(stringToArray(targetArray));
+    }
+    public String reverse(String targetArray){
+        String[] getArray=targetArray.split("");
+        String tmp=null;
+        String result=new String();
+        for(int i=0;i<getArray.length/2;i++){
+            if(getArray[i]==getArray[getArray.length-1-i]){
+                getArray[i]=getArray[i];
+            }else {
+                tmp=getArray[i]; // tmp=a;
+                getArray[i]=getArray[getArray.length-1-i];//a=c;
+                getArray[getArray.length-1-i]=tmp;//c=a;
+            }
+        }
+        for(String s:getArray){
+            result+=s;
+        }
+        return result;
     }
 }

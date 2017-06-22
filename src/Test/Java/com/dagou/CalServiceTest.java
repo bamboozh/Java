@@ -66,4 +66,9 @@ public class CalServiceTest {
         Assert.assertThat(calService.fineLostByString(input),is(4));
 
     }
+
+    @Test
+    public void test_reverse_string() throws Exception {
+        Assert.assertThat(calService.reverse("abcd"),is("dcba"));
+    }
 }

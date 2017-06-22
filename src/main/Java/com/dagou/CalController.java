@@ -20,7 +20,21 @@ public class CalController {
         return calService.cal(length);
     }
     @RequestMapping("/dagou")
-    public Integer Dagou(@RequestParam(value="inputArray",required = true) String inputArray){
-        return calService.fineLostByString(inputArray);
+    public Integer dagou(@RequestParam(value="inputArray",required = true) String inputArray,@RequestParam(value = "method",required = true)String method){
+        if(method.equals("fineLostByString")){
+            return calService.fineLostByString(inputArray);
+        }
+        if (method.equals("findLostByMap")){
+            return calService.findLostByMap(inputArray);
+        }
+        if(method.equals("findLostByXOR")){
+            return calService.findLostByXOR(inputArray);
+        }
+        if (method.equals("findLostBySort")){
+            return calService.findLostBySort(inputArray);
+        }
+        else {
+            return calService.findLostBySet(inputArray);
+        }
     }
 }
