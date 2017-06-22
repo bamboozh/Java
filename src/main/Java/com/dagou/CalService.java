@@ -1,5 +1,6 @@
 package com.dagou;
 
+import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -76,5 +77,13 @@ public class CalService {
             result = result^i;
         }
         return result;
+    }
+    public  Integer fineLostByString(String targetArray){
+        String[] getArray= targetArray.split(",");
+        int[] getInt=new int[getArray.length];
+        for(int i=0;i<getArray.length;i++){
+            getInt[i]=Integer.valueOf(getArray[i]);
+        }
+        return findLostBySet(getInt);
     }
 }

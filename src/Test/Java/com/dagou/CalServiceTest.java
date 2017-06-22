@@ -63,7 +63,7 @@ public class CalServiceTest {
     @Test
     public void test_find_lost_from_string() throws Exception {
         String input = "1,2,3,4,5,6,1,2,3,5,6";
-        Assert.assertThat(calService.findLost(input),is(4));
+        Assert.assertThat(calService.fineLostByString(input),is(4));
 
     }
 }
