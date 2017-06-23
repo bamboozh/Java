@@ -119,4 +119,12 @@ public class CalService {
         }
         return result;
     }
+    public String reverseByString(String targetArray){
+        StringBuffer result=new StringBuffer();
+        for(int i=targetArray.length()-1;i>=0;i--){
+            result.append(targetArray.charAt(i));
+        }
+        return String.valueOf(result);
+    }
+
 }
