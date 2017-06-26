@@ -1,9 +1,14 @@
 package com.dagou;
 
+import com.dagou.exceptions.IllegalInputsException;
+import com.dagou.exceptions.MyCheckedException;
+import com.dagou.exceptions.MyRuntimeException;
 import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by bobo on 2017/6/18.
@@ -44,9 +49,9 @@ public class CalService {
         for (int i = 0; i < targetArray.length; i++) {
             if(targetMap.containsKey(targetArray[i])){
                 int value=targetMap.get(targetArray[i]);
-                targetMap.put(targetArray[i],value+1);
+                targetMap.put(targetArray[i], value + 1);
             }else {
-                targetMap.put(targetArray[i],1);
+                targetMap.put(targetArray[i], 1);
             }
         }
         for(Integer key :targetMap.keySet()){
@@ -65,9 +70,16 @@ public class CalService {
             }else{
                 targetSet.add(targetArray[i]);
             }
-        }for (Integer key :targetSet){
-            return key;
         }
+        if(targetSet.size()==0) {
+            throw new IllegalInputsException("input illegal");
+        }
+        if(targetSet.size()>1){
+            throw new IllegalInputsException("not only one");
+        }
+            for (Integer key : targetSet) {
+                return key;
+            }
         return null;
     }
 
@@ -79,13 +91,18 @@ public class CalService {
         return result;
     }
     public  Integer fineLostByString(String targetArray){
-        return findLostBySet(this.stringToArray(targetArray));
+        return findLostBySet(stringToArray(targetArray));
     }
-    public int[] stringToArray(String targetArray){
-        String[] getArray= targetArray.split(",");
-        int[] getInt=new int[getArray.length];
-        for(int i=0;i<getArray.length;i++){
-            getInt[i]=Integer.valueOf(getArray[i]);
+    public int[] stringToArray(String targetArray) {
+        int[] getInt;
+        try {
+            String[] getArray = targetArray.split(",");
+            getInt = new int[getArray.length];
+            for (int i = 0; i < getArray.length; i++) {
+                getInt[i] = Integer.valueOf(getArray[i]);
+            }
+        } catch (NumberFormatException nf) {
+            throw new IllegalInputsException(targetArray);
         }
         return getInt;
     }
@@ -103,14 +120,14 @@ public class CalService {
     }
     public String reverse(String targetArray){
         String[] getArray=targetArray.split("");
-        String tmp=null;
-        String result=new String();
+        String tmp;
+        String result="";
         for(int i=0;i<getArray.length/2;i++){
-            if(getArray[i]==getArray[getArray.length-1-i]){
+            if(getArray[i].equals(getArray[getArray.length-1-i])){
                 getArray[i]=getArray[i];
             }else {
                 tmp=getArray[i]; // tmp=a;
-                getArray[i]=getArray[getArray.length-1-i];//a=c;
+                getArray[i]=getArray[getArray.length-1-i];//a=c
                 getArray[getArray.length-1-i]=tmp;//c=a;
             }
         }
@@ -120,11 +137,18 @@ public class CalService {
         return result;
     }
     public String reverseByString(String targetArray){
-        StringBuffer result=new StringBuffer();
+        StringBuilder result=new StringBuilder();
         for(int i=targetArray.length()-1;i>=0;i--){
             result.append(targetArray.charAt(i));
         }
         return String.valueOf(result);
     }
 
+    public void throwMyException() throws MyCheckedException {
+        throw new MyCheckedException();
+    }
+
+    public void throwMyRTException(){
+        throw new MyRuntimeException();
+    }
 }

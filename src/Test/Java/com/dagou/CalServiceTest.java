@@ -1,5 +1,7 @@
 package com.dagou;
 
+import com.dagou.exceptions.IllegalInputsException;
+import com.dagou.exceptions.MyCheckedException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,7 +64,7 @@ public class CalServiceTest {
 
     @Test
     public void test_find_lost_from_string() throws Exception {
-        String input = "1,2,3,4,5,6,1,2,3,5,6";
+        String input = "1,2,3,4,5,6,1,2,3,5,6,s";
         Assert.assertThat(calService.fineLostByString(input),is(4));
 
     }
@@ -75,5 +77,30 @@ public class CalServiceTest {
     @Test
     public void testReverseByString() throws Exception {
         Assert.assertThat(calService.reverseByString("abcd"),is("dcba"));
+    }
+
+    @Test
+    public void test_catch_exception_1() throws MyCheckedException {
+        calService.throwMyException();
+    }
+
+    @Test
+    public void test_catch_exception_2()  {
+        calService.throwMyRTException();
+    }
+
+
+    @Test(expected = IllegalInputsException.class)
+    public void test_throw_exception() throws Exception {
+        calService.findLostBySet("a,1,c,b");
+    }
+
+    @Test(expected = IllegalInputsException.class)
+    public void test_throw_exception_2() throws Exception {
+        calService.findLostBySet("1,1,2,2");
+    }
+    @Test(expected = IllegalInputsException.class)
+    public void test_throw_exception_3() throws Exception {
+        calService.findLostBySet("1,1,2,2,3,4,,,");
     }
 }
