@@ -21,7 +21,7 @@ public class Pillar {
         return name;
     }
 
-    public Stack getReelStack() {
+    public Stack<Reel> getReelStack() {
         return reelStack;
     }
 }
