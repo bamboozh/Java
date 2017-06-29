@@ -14,7 +14,7 @@ public class Hanoi {
         Pillar tmp=new Pillar(PillarType.TMP);
         for(int i=0;i<num;i++){
             Reel reel=new Reel(num-i);
-            source.getReelStack().add(reel);
+            source.getReelList().add(reel);
         }
         System.out.println(source+"-"+destination+"-"+tmp);
         run(num, source, destination, tmp);
@@ -34,14 +34,14 @@ public class Hanoi {
 
 //
 //        moveCount++;
-//        destination.getReelStack().push(source.getReelStack().pop());
+//        destination.getReelList().push(source.getReelList().pop());
 //        if(num==1){
-////            destination.getReelStack().push(source.getReelStack().pop());
+////            destination.getReelList().push(source.getReelList().pop());
 //            System.out.println(source+"-"+destination+"-"+tmp);
 //        }else {
-////            tmp.getReelStack().push(source.getReelStack().pop());
-////            destination.getReelStack().push(source.getReelStack().pop());
-////            destination.getReelStack().push(tmp.getReelStack().pop());
+////            tmp.getReelList().push(source.getReelList().pop());
+////            destination.getReelList().push(source.getReelList().pop());
+////            destination.getReelList().push(tmp.getReelList().pop());
 //            run(num-1,source,tmp,destination);
 //            run(num-1,tmp,source,destination);
 //            System.out.println(source+"-"+destination+"-"+tmp);
@@ -49,8 +49,8 @@ public class Hanoi {
     }
 
     private void move( Pillar source, Pillar target){
-        System.out.println("run Pillar:"+source.getType()+"'s last one["+source.getReelStack().getLast().getSize()+"] to "+target.getType());
-        target.getReelStack().add(source.getReelStack().removeLast());
+        System.out.println("run Pillar:"+source.getType()+"'s last one["+source.getReelList().getLast().getSize()+"] to "+target.getType());
+        target.getReelList().add(source.getReelList().removeLast());
 
 
 
