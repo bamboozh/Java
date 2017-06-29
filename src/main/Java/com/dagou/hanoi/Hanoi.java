@@ -16,6 +16,7 @@ public class Hanoi {
             Reel reel=new Reel(num-i);
             source.getReelList().add(reel);
         }
+
         System.out.println(source+"-"+destination+"-"+tmp);
         run(num, source, destination, tmp);
         System.out.println("From " + source + " to " + "destination " + "use steps is:" + moveCount);
@@ -25,9 +26,11 @@ public class Hanoi {
         moveCount++;
         if (num == 1){
             move(source, destination);
+            print(source, tmp, destination);
         }else{
             run(num - 1, source, tmp, destination);
             move(source, destination);
+            print(source, tmp, destination);
             run(num - 1, tmp, destination, source);
         }
 
@@ -52,8 +55,80 @@ public class Hanoi {
         System.out.println("run Pillar:"+source.getType()+"'s last one["+source.getReelList().getLast().getSize()+"] to "+target.getType());
         target.getReelList().add(source.getReelList().removeLast());
 
+    }
+
+    public void print(Pillar a, Pillar b, Pillar c) {
+        Pillar source = null;
+        Pillar tmp = null;
+        Pillar destination = null;
+        if (a.getType().equals(PillarType.SOURCE)) {
+            source = a;
+            if (b.getType().equals(PillarType.TMP)) {
+                tmp = b;
+                destination = c;
+            } else {
+                tmp = c;
+                destination = b;
+            }
+        }
+        if (b.getType().equals(PillarType.SOURCE)) {
+            source = b;
+            if (b.getType().equals(PillarType.TMP)) {
+                tmp = a;
+                destination = c;
+            } else {
+                tmp = c;
+                destination = a;
+            }
+        }
+        if (c.getType().equals(PillarType.SOURCE)) {
+            source = c;
+            if (b.getType().equals(PillarType.TMP)) {
+                tmp = b;
+                destination = a;
+            } else {
+                tmp = a;
+                destination = b;
+            }
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        int length = 0;
+        System.out.println(source + "\t" + tmp + "\t" + destination);
+        if (source.getReelList().size() > tmp.getReelList().size() && source.getReelList().size() > destination.getReelList().size()) {
+            length = source.getReelList().size();
+        } else {
 
 
+            if (tmp.getReelList().size() > source.getReelList().size() && tmp.getReelList().size() > destination.getReelList().size()) {
+                length = tmp.getReelList().size();
+            } else {
+                length = destination.getReelList().size();
+            }
+        }
 
+        for (int index = 0; index < length; index++) {
+
+            if (source.getReelList().size() - 1 - index >= 0) {
+                stringBuilder.append(source.getReelList().get(source.getReelList().size() - 1 - index).getSize() + "\t");
+            } else {
+                stringBuilder.append("|\t");
+            }
+
+
+            if (tmp.getReelList().size() - 1 - index >= 0) {
+                stringBuilder.append(tmp.getReelList().get(tmp.getReelList().size() - 1 - index).getSize() + "\t");
+            } else {
+                stringBuilder.append("|\t");
+            }
+
+            if (destination.getReelList().size() - 1 - index >= 0) {
+                stringBuilder.append(destination.getReelList().get(destination.getReelList().size() - 1 - index).getSize() + "\t");
+            } else {
+                stringBuilder.append("|\t");
+            }
+
+            stringBuilder.append("\n");
+        }
+        System.out.println(stringBuilder.toString());
     }
 }
