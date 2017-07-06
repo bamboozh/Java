@@ -92,6 +92,7 @@ public class Hanoi {
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
+        String string="";
         int length = 0;
         System.out.println(source + "\t" + tmp + "\t" + destination);
         if (source.getReelList().size() > tmp.getReelList().size() && source.getReelList().size() > destination.getReelList().size()) {
@@ -107,28 +108,36 @@ public class Hanoi {
         }
 
         for (int index = 0; index < length; index++) {
+            String innerString="";
 
-            if (source.getReelList().size() - 1 - index >= 0) {
-                stringBuilder.append(source.getReelList().get(source.getReelList().size() - 1 - index).getSize() + "\t");
+            if (source.getReelList().size() -1 >= index) {
+                innerString += source.getReelList().get(index).getSize() + "\t";
+                stringBuilder.insert(0, source.getReelList().get(source.getReelList().size() - 1 - index).getSize() + "\t");
             } else {
+                innerString+="|\t";
+                stringBuilder.append("|\t");
+
+            }
+            if (tmp.getReelList().size() - 1 >=index) {
+                innerString+= tmp.getReelList().get(index).getSize() + "\t";
+                stringBuilder.insert(0, tmp.getReelList().get(tmp.getReelList().size() - 1 - index).getSize() + "\t");
+            } else {
+                innerString+="|\t";
                 stringBuilder.append("|\t");
             }
 
-
-            if (tmp.getReelList().size() - 1 - index >= 0) {
-                stringBuilder.append(tmp.getReelList().get(tmp.getReelList().size() - 1 - index).getSize() + "\t");
+            if (destination.getReelList().size() - 1  >=index) {
+                innerString+=  destination.getReelList().get( index).getSize() + "\t";
+                stringBuilder.insert(0, destination.getReelList().get(destination.getReelList().size() - 1 - index).getSize() + "\t");
             } else {
+                innerString+= "|\t";
                 stringBuilder.append("|\t");
             }
-
-            if (destination.getReelList().size() - 1 - index >= 0) {
-                stringBuilder.append(destination.getReelList().get(destination.getReelList().size() - 1 - index).getSize() + "\t");
-            } else {
-                stringBuilder.append("|\t");
-            }
-
+            string =innerString+"\n"+string;
             stringBuilder.append("\n");
+
         }
+        System.out.println(string);
         System.out.println(stringBuilder.toString());
-    }
+        }
 }
