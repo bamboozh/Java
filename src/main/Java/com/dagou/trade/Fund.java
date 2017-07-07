@@ -11,6 +11,11 @@ public class Fund {
     private float fundPrice;
     private float purchaseMoney;
 
+    public String getName() {
+        return name;
+    }
+
+    private String name;
     public float getPurchaseMoney() {
         return purchaseMoney;
     }

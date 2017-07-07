@@ -7,5 +7,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class Trade {
+    Fund fund = new Fund();
 
+    public void getFund(String name, float price, float purchaseMoney) {
+        name = fund.getName();
+        price = fund.getFundPrice();
+        purchaseMoney = fund.getPurchaseMoney();
+
+    }
 }
