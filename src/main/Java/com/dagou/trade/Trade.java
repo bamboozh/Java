@@ -1,18 +1,27 @@
 package com.dagou.trade;
 
-import org.springframework.stereotype.Service;
-
 /**
- * Created by bobo on 2017/7/6.
+ * Created by bobo on 2017/7/9.
  */
-@Service
 public class Trade {
-    Fund fund = new Fund();
+    private float price;
+    private float purchaseMoney;
+    private float amount;
+    public Trade(float price,float purchaseMoney){
+        this.price=price;
+        this.purchaseMoney=purchaseMoney;
+        amount=purchaseMoney/price;
+    }
 
-    public void getFund(String name, float price, float purchaseMoney) {
-        name = fund.getName();
-        price = fund.getFundPrice();
-        purchaseMoney = fund.getPurchaseMoney();
+    public float getAmount() {
+        return amount;
+    }
 
+    public float getPurchaseMoney() {
+        return purchaseMoney;
+    }
+
+    public float getPrice() {
+        return price;
     }
 }
