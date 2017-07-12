@@ -1,7 +1,9 @@
 package com.dagou.trade;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +13,22 @@ import java.util.List;
 @Service
 public class TradeService {
     List<Trade> tradeRecord = new ArrayList<>();
-
-    public void trade(float price, float purchaseMoney) {
+    private void TradeService() throws IOException,ClassNotFoundException{
+        File file=new File("E:/trade.txt");
+        ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(file));
+        if(file.exists()){
+            tradeRecord=(List<Trade>) objectInputStream.readObject();
+        }
+    }
+    public void trade(float price, float purchaseMoney) throws IOException{
         Trade trade = new Trade(price, purchaseMoney);
         tradeRecord.add(trade);
+        serializeTradeRecord();
+    }
+    private void serializeTradeRecord()throws IOException{
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream(new File("E:/trade.txt")));
+        objectOutputStream.writeObject(tradeRecord);
+        objectOutputStream.close();
     }
 
     public float calProfit(float price) {
