@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class TradeController {
        return tradeService.tradeRecord;
     }
     @RequestMapping("/trade")
-    public void trade(@RequestParam("price") float price, @RequestParam("tradeMoney") float tradeMoney){
+    public void trade(@RequestParam("price") float price, @RequestParam("tradeMoney") float tradeMoney)throws IOException{
         tradeService.trade(price, tradeMoney);
     }
     @RequestMapping("/calProfit")
