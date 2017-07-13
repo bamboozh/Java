@@ -1,5 +1,7 @@
 package com.dagou.trade;
 
+import com.dagou.exceptions.IllegalInputsException;
+import javassist.bytecode.stackmap.BasicBlock;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -76,7 +78,10 @@ public class TradeService {
         }
         return purchaseMoney;
     }
-    public float sell(float price, float amount){
-        return 1;
+    public float sell(float price, float amount)throws IllegalInputsException{
+        if(getAmount()-amount<0){
+            throw new IllegalInputsException("Illegal input");
+        }
+        return price*amount;
     }
 }
