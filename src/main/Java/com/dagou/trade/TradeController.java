@@ -31,4 +31,8 @@ public class TradeController {
     public  float getBEP(@RequestParam("price") float price,@RequestParam("BEP")float BEP){
         return tradeService.calBEP(price,BEP);
     }
+    @RequestMapping("/sell")
+    public  float getSell(@RequestParam("amount")float amount,@RequestParam("price") float price){
+        return tradeService.sell(price,amount);
+    }
 }
